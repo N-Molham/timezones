@@ -1,2 +1,2 @@
 # timezones
-Timezone difference app
+Timezone difference app > [oneline](https://nabeel.molham.me/timezones/)
