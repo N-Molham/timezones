@@ -21,6 +21,7 @@
     "vue": "^2.3.3",
     "select2": "^4.0.3",
     "select2-bootstrap-theme": "^0.1.0-beta.10",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "store.js": "marcuswestin/store.js#^2.0.4"
   }
 }

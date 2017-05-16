@@ -16,7 +16,7 @@
 					var zones = [];
 
 					for ( var index in this.selected_zones ) {
-						var zone = this.datetime.tz( this.selected_zones[index] );
+						var zone = this.datetime.tz( this.selected_zones[ index ] );
 
 						zones.push( {
 							index: index,
@@ -27,6 +27,13 @@
 					}
 
 					return zones;
+				}
+			},
+			watch: {
+				// when [selected_zones] prop gets changed
+				selected_zones: function( selected_zones ) {
+					// save updated value to WebStorage
+					store.set( 'selected_zones', selected_zones );
 				}
 			},
 			methods: {
@@ -42,15 +49,21 @@
 					this.datetime = m( this.datetime.format() );
 				},
 				remove_zone: function( index ) {
-					if ( this.selected_zones[index] !== undefined ) {
+					if ( this.selected_zones[ index ] !== undefined ) {
 						// remove zone from list
 						this.selected_zones.splice( index, 1 );
 					}
 				},
 			},
 			created: function() {
+				// load from WebStorage
+				var storage = store.get( 'selected_zones' );
+				if ( storage === undefined ) {
+					storage = [ 'Africa/Cairo' ];
+				}
+
 				// default/first zone
-				this.selected_zones = [ 'Africa/Cairo' ];
+				this.selected_zones = storage;
 			}
 		} );
 
@@ -61,19 +74,19 @@
 
 		// Dropdown init
 		$( '#timezones-dropdown' ).select2( {
-			// prepare zones list for Select2 format
-			data: [ { id: -1, text: 'Select a timezone' } ].concat( available_zones.map( function( zone, index ) {
-				return { id: index, text: zone };
-			} ) )
-		} )
-		// when zone gets selected
-		.on( 'change', function( e ) {
-			var zone_index = e.currentTarget.value,
-				zone_name = available_zones[ zone_index ];
-			if ( zone_name !== undefined && app.selected_zones.indexOf( zone_name ) === -1 ) {
-				// update app zones list
-				app.selected_zones.push( zone_name );
-			}
-		} );
+				// prepare zones list for Select2 format
+				data: [ { id: -1, text: 'Select a timezone' } ].concat( available_zones.map( function( zone, index ) {
+					return { id: index, text: zone };
+				} ) )
+			} )
+			// when zone gets selected
+			.on( 'change', function( e ) {
+				var zone_index = e.currentTarget.value,
+					zone_name = available_zones[ zone_index ];
+				if ( zone_name !== undefined && app.selected_zones.indexOf( zone_name ) === -1 ) {
+					// update app zones list
+					app.selected_zones.push( zone_name );
+				}
+			} );
 	} );
 } )( jQuery, moment );
