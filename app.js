@@ -30,6 +30,17 @@
 				}
 			},
 			methods: {
+				update_datetime: function( type, add, amount ) {
+					amount = amount || 1;
+
+					if ( add ) {
+						this.datetime.add( amount, type );
+					} else {
+						this.datetime.subtract( amount, type );
+					}
+
+					this.datetime = m( this.datetime.format() );
+				},
 				remove_zone: function( index ) {
 					if ( this.selected_zones[index] !== undefined ) {
 						// remove zone from list

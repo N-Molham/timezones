@@ -39,8 +39,8 @@
 				<thead>
 					<tr class="info">
 						<th>Timezone</th>
-						<th>Date</th>
-						<th>Time</th>
+						<th>Date <a href="javascript:void(0)" v-on:click="update_datetime('d', true)"><kbd>+</kbd></a> / <a href="javascript:void(0)" v-on:click="update_datetime('d', false)"><kbd>-</kbd></a></th>
+						<th>Time <a href="javascript:void(0)" v-on:click="update_datetime('h', true)"><kbd>+</kbd></a> / <a href="javascript:void(0)" v-on:click="update_datetime('h', false)"><kbd>-</kbd></a></th>
 						<th>Remove</th>
 					</tr>
 				</thead>
