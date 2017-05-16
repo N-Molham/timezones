@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Timezones</title>
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+	<!-- Select2 Style -->
+	<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
+	<link rel="stylesheet" href="bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
+
+	<style type="text/css">
+	.timezones table tbody td:nth-child(1) input { min-width: 156px; }
+	.timezones table tbody td:nth-child(2) input { min-width: 180px; }
+	.timezones table tbody td:nth-child(3) input { min-width: 108px; }
+	.timezones table tbody td { border-bottom-width: 4px; }
+	.timezones table tbody td:last-child { width: 60px; }
+	</style>
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div id="timezones" class="container timezones">
+		<h1>Timezones Differences Date &amp; Time</h1>
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr class="info">
+						<th>Timezone</th>
+						<th>Date</th>
+						<th>Time</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(zone, index) in zones">
+						<td><input type="text" readonly="readonly" class="form-control" v-model="zone.name"></td>
+						<td><input type="text" readonly="readonly" class="form-control" v-model="zone.date"></td>
+						<td><input type="text" readonly="readonly" class="form-control" v-model="zone.time"></td>
+						<td><input type="button" class="btn btn-danger btn-block" value="X" v-on:click="remove_zone(index)" title="Remove"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h2>Add Timezone</h2>
+		<select id="timezones-dropdown"></select>
+	</div>
+
+	<!-- jQuery -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+	<!-- Select2.js -->
+	<script src="bower_components/select2/dist/js/select2.min.js"></script>
+
+	<!-- Vue.js -->
+	<script src="bower_components/vue/dist/vue.min.js"></script>
+
+	<!-- Moment.js -->
+	<script src="bower_components/moment/min/moment.min.js"></script>
+	<script src="bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
+
+	<!-- App code -->
+	<script src="app.js"></script>
+</body>
+
+</html>
