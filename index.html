@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 
 <head>
 	<meta charset="utf-8">
@@ -46,9 +46,9 @@
 				</thead>
 				<tbody>
 					<tr v-for="(zone, index) in zones">
-						<td><input type="text" readonly="readonly" class="form-control" v-model="zone.name"></td>
-						<td><input type="text" readonly="readonly" class="form-control" v-model="zone.date"></td>
-						<td><input type="text" readonly="readonly" class="form-control" v-model="zone.time"></td>
+						<td><input type="text" class="form-control" v-model="zone.name" v-on:keyup="update_zone_name(index, $event)"></td>
+						<td><input type="text" readonly="readonly" class="form-control input-auto-select" v-model="zone.date"></td>
+						<td><input type="text" readonly="readonly" class="form-control input-auto-select" v-model="zone.time"></td>
 						<td><input type="button" class="btn btn-danger btn-block" value="X" v-on:click="remove_zone(index)" title="Remove"></td>
 					</tr>
 				</tbody>
@@ -57,6 +57,10 @@
 
 		<h2>Add Timezone</h2>
 		<select id="timezones-dropdown"></select>
+		
+		<h2>Import/Export List</h2>
+		<input type="button" class="btn btn-danger" value="Import" v-on:click="import_list" />
+		<input type="button" class="btn btn-primary" value="Export" v-on:click="export_list" />
 	</div>
 
 	<!-- jQuery -->
