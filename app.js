@@ -40,6 +40,20 @@
 				}
 			},
 			methods : {
+				move_up         : function ( index ) {
+					this.swap_zones( index, index - 1 );
+				},
+				move_down       : function ( index ) {
+					this.swap_zones( index, index + 1 );
+				},
+				swap_zones      : function ( old_index, new_index ) {
+					if ( new_index < 0 || new_index > this.selected_zones.length - 1 ) {
+						// skip invalid index
+						return;
+					}
+
+					this.selected_zones[ old_index ] = this.selected_zones.splice( new_index, 1, this.selected_zones[ old_index ] )[ 0 ];
+				},
 				setup_zone      : function ( zone ) {
 					return {
 						alias   : '',

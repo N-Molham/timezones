@@ -16,11 +16,14 @@
 	<link rel="stylesheet" href="bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
 
 	<style type="text/css">
-	.timezones table tbody td:nth-child(1) input { min-width: 156px; }
-	.timezones table tbody td:nth-child(2) input { min-width: 180px; }
-	.timezones table tbody td:nth-child(3) input { min-width: 108px; }
-	.timezones table tbody td { border-bottom-width: 4px; }
-	.timezones table tbody td:last-child { width: 60px; }
+		.timezones table tbody td:nth-child(1) input { min-width: 156px; }
+		.timezones table tbody td:nth-child(2) input { min-width: 180px; }
+		.timezones table tbody td:nth-child(3) input { min-width: 108px; }
+		.timezones table tbody td { border-bottom-width: 4px; }
+		.timezones table tbody td:last-child { width: 60px; }
+		.timezones table tbody td:first-child { width: 44px; text-align: center; }
+		.move-icon { cursor: pointer; font-size: 16px; color: #888888; display: block; }
+		.move-icon:hover { background: #888888; color: #fff; }
 	</style>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -38,6 +41,7 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr class="info">
+						<th>&nbsp;</th>
 						<th>Timezone</th>
 						<th>Date <a href="javascript:void(0)" v-on:click="update_datetime('d', true)"><kbd>+</kbd></a> / <a href="javascript:void(0)" v-on:click="update_datetime('d', false)"><kbd>-</kbd></a></th>
 						<th>Time <a href="javascript:void(0)" v-on:click="update_datetime('h', true)"><kbd>+</kbd></a> / <a href="javascript:void(0)" v-on:click="update_datetime('h', false)"><kbd>-</kbd></a></th>
@@ -46,6 +50,10 @@
 				</thead>
 				<tbody>
 					<tr v-for="(zone, index) in zones">
+						<td>
+							<i class="glyphicon glyphicon-chevron-up move-icon" v-on:click="move_up(index)"></i>
+							<i class="glyphicon glyphicon-chevron-down move-icon" v-on:click="move_down(index)"></i>
+						</td>
 						<td><input type="text" class="form-control" v-model="zone.name" v-on:keyup="update_zone_name(index, $event)"></td>
 						<td><input type="text" readonly="readonly" class="form-control input-auto-select" v-model="zone.date"></td>
 						<td><input type="text" readonly="readonly" class="form-control input-auto-select" v-model="zone.time"></td>
@@ -62,7 +70,7 @@
 		<input type="button" class="btn btn-danger" value="Import" v-on:click="import_list" />
 		<input type="button" class="btn btn-primary" value="Export" v-on:click="export_list" />
 	</div>
-
+	
 	<!-- jQuery -->
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 
