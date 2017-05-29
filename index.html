@@ -9,17 +9,22 @@
 	<title>Timezones</title>
 
 	<!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css?version=29052017">
 
 	<!-- Select2 Style -->
-	<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
-	<link rel="stylesheet" href="bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css?version=29052017">
+	<link rel="stylesheet" href="bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css?version=29052017">
+	
+	<!-- DateTimePicker -->
+	<link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css?version=29052017" />
 
 	<style type="text/css">
+		.timezones .table-responsive { overflow-y: visible; }
 		.timezones table tbody td:nth-child(1) input { min-width: 156px; }
 		.timezones table tbody td:nth-child(2) input { min-width: 180px; }
-		.timezones table tbody td:nth-child(3) input { min-width: 108px; }
-		.timezones table tbody td { border-bottom-width: 4px; }
+		.timezones table tbody td input.picker-date { min-width: 180px; }
+		.timezones table tbody td input.picker-time { min-width: 88px; }
+		.timezones table tbody td { border-bottom-width: 4px; position: relative; }
 		.timezones table tbody td:last-child { width: 60px; }
 		.timezones table tbody td:first-child { width: 44px; text-align: center; }
 		.move-icon { cursor: pointer; font-size: 16px; color: #888888; display: block; }
@@ -55,8 +60,8 @@
 							<i class="glyphicon glyphicon-chevron-down move-icon" v-on:click="move_down(index)"></i>
 						</td>
 						<td><input type="text" class="form-control" v-model="zone.name" v-on:keyup="update_zone_name(index, $event)"></td>
-						<td><input type="text" readonly="readonly" class="form-control input-auto-select" v-model="zone.date"></td>
-						<td><input type="text" readonly="readonly" class="form-control input-auto-select" v-model="zone.time"></td>
+						<td><input type="text" readonly="readonly" class="form-control input-auto-select input-picker picker-date" v-bind:data-index="index" v-model="zone.date"></td>
+						<td><input type="text" readonly="readonly" class="form-control input-auto-select input-picker picker-time" v-bind:data-index="index" v-model="zone.time"></td>
 						<td><input type="button" class="btn btn-danger btn-block" value="X" v-on:click="remove_zone(index)" title="Remove"></td>
 					</tr>
 				</tbody>
@@ -70,25 +75,28 @@
 		<input type="button" class="btn btn-danger" value="Import" v-on:click="import_list" />
 		<input type="button" class="btn btn-primary" value="Export" v-on:click="export_list" />
 	</div>
-	
+
 	<!-- jQuery -->
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js?version=29052017"></script>
 
 	<!-- Select2.js -->
-	<script src="bower_components/select2/dist/js/select2.min.js"></script>
+	<script src="bower_components/select2/dist/js/select2.min.js?version=29052017"></script>
 
 	<!-- Vue.js -->
-	<script src="bower_components/vue/dist/vue.min.js"></script>
+	<script src="bower_components/vue/dist/vue.min.js?version=29052017"></script>
 
 	<!-- Moment.js -->
-	<script src="bower_components/moment/min/moment.min.js"></script>
-	<script src="bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
+	<script src="bower_components/moment/min/moment.min.js?version=29052017"></script>
+	<script src="bower_components/moment-timezone/builds/moment-timezone-with-data.js?version=29052017"></script>
+
+	<!-- DateTimePicker -->
+	<script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js?version=29052017"></script>
 
 	<!-- Store.js -->
-	<script src="bower_components/store.js/dist/store.everything.min.js"></script>
+	<script src="bower_components/store.js/dist/store.everything.min.js?version=29052017"></script>
 
 	<!-- App code -->
-	<script src="app.js"></script>
+	<script src="app.js?version=29052017"></script>
 </body>
 
 </html>

@@ -136,6 +136,24 @@
 						// remove zone from list
 						this.selected_zones.splice( index, 1 );
 					}
+				},
+				init_pickers    : function () {
+					// all inputs
+					var $inputs = $( this.$el ).find( '.input-picker' );
+
+					// dates
+					$inputs.filter( '.picker-date' ).datetimepicker( {
+						format         : 'dddd Do MMMM YYYY',
+						ignoreReadonly : true,
+						showTodayButton: true
+					} );
+
+					// times
+					$inputs.filter( '.picker-time' ).datetimepicker( {
+						format         : 'hh:mm A',
+						ignoreReadonly : true,
+						showTodayButton: true
+					} );
 				}
 			},
 			created : function () {
@@ -147,11 +165,36 @@
 
 				// default/first zone
 				this.selected_zones = storage;
+			},
+			mounted : function () {
+				this.init_pickers();
+			},
+			updated : function () {
+				this.init_pickers();
 			}
 		} );
 
+		// datepicker(s) change
+		$( '#timezones' ).on( 'dp.change', '.input-picker', function ( e ) {
+			var picker_name  = app.selected_zones[ e.currentTarget.dataset.index ],
+			    new_datetime = app.datetime.clone().tz( picker_name.timezone );
+
+			if ( e.currentTarget.className.indexOf( 'picker-date' ) > -1 ) {
+				// date picker
+				new_datetime.date( e.date.date() );
+				new_datetime.month( e.date.month() );
+				new_datetime.year( e.date.year() );
+			} else {
+				// time picker
+				new_datetime.second( e.date.second() );
+				new_datetime.minute( e.date.minute() );
+				new_datetime.hour( e.date.hour() );
+			}
+
+			app.datetime = new_datetime;
+		} )
 		// auto-select input content on focus
-		$( '#timezones' ).on( 'focus', '.table input.input-auto-select', function ( e ) {
+		.on( 'focus', '.table input.input-auto-select', function ( e ) {
 			e.currentTarget.select();
 		} );
 
